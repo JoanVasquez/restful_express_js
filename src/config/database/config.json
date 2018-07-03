@@ -1,0 +1,23 @@
+{
+  "development": {
+    "user": "root",
+    "password": "pass",
+    "database": "userdb_dev",
+    "host": "localhost",
+    "connectionLimit": 10
+  },
+  "test": {
+    "user": "root",
+    "password": "pass",
+    "database": "userdb_Test",
+    "host": "localhost",
+    "connectionLimit": 10
+  },
+  "production": {
+    "user": "root",
+    "password": "pass",
+    "database": "userdb_Prod",
+    "host": "localhost",
+    "connectionLimit": 10
+  }
+}
