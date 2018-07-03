@@ -8,8 +8,8 @@ const Response = require('../validations/Response');
 const userDao = new UserDao();
 
 router.put('/register', (req, res, next) => {
-	Validator.userValidation(req, res);
-	next();
+	let validation = Validator.userValidation(req, res);
+	if(validation) next();
 }, (req, res) => {
 	let user = req.body;
 	userDao.saveEntity(user).
@@ -18,8 +18,8 @@ router.put('/register', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-	Validator.userValidation(req, res);
-	next();
+	let validation = Validator.userValidation(req, res);
+	if(validation) next();
 }, (req, res) => {
 	let email = req.body.email;
 	let password = req.body.password;
@@ -32,8 +32,9 @@ router.post('/login', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
-	Validator.userValidation(req, res);
-	Jwt.verifyJwt(req, res);
+	let validation = Validator.userValidation(req, res);
+	let jwtVerification = Jwt.verifyJwt(req, res);
+	if(validation && jwtVerification) next();
 	next();
 }, (req, res) => {
 	let user = req.body;
@@ -43,8 +44,8 @@ router.post('/update', (req, res, next) => {
 });
 
 router.delete('/delete', (req, res, next) => {
-	Jwt.verifyJwt(req, res);
-	next();
+	let jwtVerification = Jwt.verifyJwt(req, res);
+	if(jwtVerification) next();
 }, (req, res) => {
 	let userId = req.body.id;
 	userDao.deleteEntity(userId).
@@ -53,8 +54,8 @@ router.delete('/delete', (req, res, next) => {
 });
 
 router.get('/read', (req, res, next) => {
-	Jwt.verifyJwt(req, res);
-	next();
+	let jwtVerification = Jwt.verifyJwt(req, res);
+	if(jwtVerification) next();
 }, (req, res) => {
 	userDao.readEntities().
 	then(users => res.status(200).send(Response.onSuccess(users))).
