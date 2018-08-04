@@ -14,7 +14,7 @@ module.exports = class Validator {
         min: 5,
         max: undefined
       });
-      req.checkBody('role.role', 'You must set a role!').notEmpty();
+      //req.checkBody('role.role', 'You must set a role!').notEmpty();
 
       errors = req.validationErrors();
     } else if (req.path == '/login') {
