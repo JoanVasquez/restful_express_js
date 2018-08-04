@@ -6,7 +6,14 @@ const path = require('path');
 const app = express();
 
 //SETTINGS
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
+	res.header("Access-Control-Allow-Credentials", "true");
+	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+    next();
+});
 
 //MIDDLEWARES
 app.use(bodyParser.json());
