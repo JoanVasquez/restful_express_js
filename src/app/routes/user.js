@@ -35,7 +35,7 @@ router.post('/update', (req, res, next) => {
 	let validation = Validator.userValidation(req, res);
 	let jwtVerification = Jwt.verifyJwt(req, res);
 	if(validation && jwtVerification) next();
-	next();
+	//next();
 }, (req, res) => {
 	let user = req.body;
 	userDao.updateEntity(user).
